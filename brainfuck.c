@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #define FILE_MAX_SIZE_CHARS 30000
 #define ERR_NONE 0
@@ -14,10 +13,12 @@ int main(int argc, char** argv)
 	char *input = malloc(sizeof(char) * FILE_MAX_SIZE_CHARS), c;
 	FILE* file;
 	unsigned long i = 0L;
-	int output = ERR_NONE;
+	int output = ERR_NONE, j = 0;
 	if (argc == 2)
 	{
-		strcpy(input, argv[1]);
+		while (argv[1][j++] != 0x0)
+			input[j - 1] = argv[1][j - 1];
+		input[j - 1] = 0x0;
 		if (is_file((const char*) input))
 		{
 			file = fopen(input, "r");
